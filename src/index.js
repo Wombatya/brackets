@@ -1,10 +1,16 @@
 module.exports = function check(str, bracketsConfig) {
-  const openBrackets = ['(', '{', '[', '|'];
+  const openBrackets = ['(', '{', '[', '1', '3', '5']; 
+  const sameBrackets = ['|', '7', '8'];
   const bracketsPair = {
     [')']: '(',
     ['}']: '{',
     [']']: '[',
-    ['|']: '|'
+    ['2']: '1',
+    ['4']: '3',
+    ['6']: '5',
+    ['|']: '|',
+    ['7']: '7',
+    ['8']: '8',
   };
   
 let stack = [];
@@ -14,7 +20,10 @@ let stack = [];
     
     if (openBrackets.includes(currentSymbol)) {
       stack.push(currentSymbol);
-    } else {
+    } else if (sameBrackets.includes(currentSymbol) && !stack.includes(currentSymbol)) {
+      stack.push(currentSymbol);
+    } 
+    else {
       if (stack.length === 0) {
         return false;
       }
